@@ -30,8 +30,8 @@ public class BookService {
 
 	@RequestMapping("/search")
 	public List<BookResult> search(@RequestParam(value = "query") String query) {
-		List<BookResult> bookResults = new ArrayList<BookResult>();
-		List<BookResult> tempBookResults = new ArrayList<BookResult>(bookRepo.getSearchResults(query));
+		List<BookResult> bookResults = new ArrayList<>();
+		List<BookResult> tempBookResults = new ArrayList<>(bookRepo.getSearchResults(query));
 		for (BookResult bookResult : tempBookResults) {
 			bookResult.setAuthors(authorRepo.getAuthorNamesByISBN13(bookResult.getISBN13()));
 			bookResult.setAvailability(bookLoanRepo.getAvailability(bookResult.getISBN13()));

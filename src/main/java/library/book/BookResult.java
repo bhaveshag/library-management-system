@@ -1,7 +1,7 @@
 package library.book;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BookResult extends Book {
 
@@ -15,11 +15,11 @@ public class BookResult extends Book {
 	}
 
 	public void setAuthors(List<String> authors) {
-		this.authors = new ArrayList<String>(authors);
+		this.authors = new ArrayList<>(authors);
 	}
 
 	public void setAvailability(Boolean availability) {
-		this.availability = new Boolean(availability);
+		this.availability = availability;
 	}
 
 	public List<String> getAuthors() {

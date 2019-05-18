@@ -3,17 +3,21 @@ package library.fine;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import library.book.BookLoading;
 import library.book.loan.BookLoan;
 import library.book.loan.BookLoanRepository;
 
 @RestController
 public class FineService {
-
+	private static Logger logger = LoggerFactory.getLogger(BookLoading.class);
+	
 	@Autowired
 	FineRepository fineRepo;
 
@@ -22,7 +26,7 @@ public class FineService {
 
 	@RequestMapping("/updatefine")
 	public int fines() {
-		List<BookLoan> bookLoans = new ArrayList<BookLoan>(bookLoanRepo.getPendingLoanIds());
+		List<BookLoan> bookLoans = new ArrayList<>(bookLoanRepo.getPendingLoanIds());
 		for (BookLoan bookLoan : bookLoans) {
 			try {
 				java.util.Date date = null;
@@ -39,7 +43,9 @@ public class FineService {
 
 				long diffInMillies = date.getTime() - dueDate.getTime();
 				long days = diffInMillies / (1000 * 60 * 60 * 24);
-				java.math.BigDecimal fineAmt = new java.math.BigDecimal(days * 0.25);
+				
+				// 10 Rs fine per day 
+				java.math.BigDecimal fineAmt = new java.math.BigDecimal(days * 10);
 				if (fineRepo.checkLoanId(bookLoan.getLoanId()) == 0) {
 					fineRepo.insertFine(bookLoan.getLoanId(), fineAmt);
 				} else {
@@ -48,7 +54,7 @@ public class FineService {
 					}
 				}
 			} catch (Exception exception) {
-				System.out.println("Date parse exception");
+				logger.error("Date parse exception", exception);
 			}
 		}
 		return 1;

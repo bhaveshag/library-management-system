@@ -1,14 +1,13 @@
 package library.book.loan;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Date;
 
 @Repository
 public class BookLoanRepository {
@@ -41,12 +40,9 @@ public class BookLoanRepository {
 	
 	public int insertBookLoan(final BookLoan bookLoan) {
 		try {
-			return jdbcTemplate.update("INSERT INTO book_loan(ISBN13, card_id, date_out, due_date) VALUES(?, ?, ?, ?)", new Object[] {
-				bookLoan.getISBN13(),
-				bookLoan.getCardId(),
-				bookLoan.getDateOut(),
-				bookLoan.getDueDate()
-			});
+			return jdbcTemplate.update("INSERT INTO book_loan(ISBN13, card_id, date_out, due_date) VALUES(?, ?, ?, ?)",
+					new Object[] { bookLoan.getISBN13(), bookLoan.getCardId(), bookLoan.getDateOut(),
+							bookLoan.getDueDate() });
 		}
 		catch(Exception e) {
 			return 0;

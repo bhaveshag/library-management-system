@@ -33,29 +33,26 @@ public class BookRepository {
 	}
 
 	public int[] insertBooks(final List<Book> books) {
-		List<Object[]> batch = new ArrayList<Object[]>();
+		List<Object[]> batch = new ArrayList<>();
 		for (Book book : books) {
 			Object[] values = new Object[] { book.getISBN10(), book.getISBN13(), book.getTitle(), book.getCover(),
 					book.getPublisher(), book.getPages() };
 			batch.add(values);
 		}
-		int[] updateCount = jdbcTemplate.batchUpdate("INSERT INTO book VALUES(?, ?, ?, ?, ?, ?)", batch);
-		return updateCount;
+		return jdbcTemplate.batchUpdate("INSERT INTO book VALUES(?, ?, ?, ?, ?, ?)", batch);
 	}
 
 	public static final RowMapper<BookResult> bookResultMapper = new RowMapper<BookResult>() {
 		public BookResult mapRow(ResultSet rs, int rowNum) throws SQLException {
-			BookResult bookResult = new BookResult(rs.getString("ISBN10"), rs.getString("ISBN13"),
-					rs.getString("title"), rs.getString("cover"), rs.getString("publisher"), rs.getInt("pages"));
-			return bookResult;
+			return new BookResult(rs.getString("ISBN10"), rs.getString("ISBN13"), rs.getString("title"),
+					rs.getString("cover"), rs.getString("publisher"), rs.getInt("pages"));
 		}
 	};
 
 	public static final RowMapper<Book> bookMapper = new RowMapper<Book>() {
 		public Book mapRow(ResultSet rs, int rowNum) throws SQLException {
-			Book book = new Book(rs.getString("ISBN10"), rs.getString("ISBN13"), rs.getString("title"),
+			return new Book(rs.getString("ISBN10"), rs.getString("ISBN13"), rs.getString("title"),
 					rs.getString("cover"), rs.getString("publisher"), rs.getInt("pages"));
-			return book;
 		}
 	};
 
