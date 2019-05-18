@@ -1,0 +1,98 @@
+html * {
+	font-family: "Inconsolata", "Courier", monospace !important;
+	color: #657b83;
+}
+
+nav {
+	background-color: #073642;
+	margin-bottom: 0px;
+}
+
+body {
+	background-color: #eee8d5;
+	padding-top: 80px;
+}
+
+footer {
+	background-color: #eee8d5;
+	margin-top: 30px;
+}	
+
+img {
+	float: left;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-right: 20px;
+}
+
+.navbar-brand {
+	color: #d33682;
+}
+
+a.navbar-brand:hover {
+	color: #6c71c4;
+}
+
+.link {
+	color: #268bd2;
+}
+
+.search {
+	margin-top: 12px;
+	margin-bottom: 5px;
+	margin-right: 5px;
+	margin-left: 10px;
+}
+
+.book {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.title {
+	color: #b58900;
+	padding-top: 10px;
+}
+
+.authors {
+	color: #6c71c4;
+}
+
+.isbn {
+	color: #cb4b16;
+}
+
+.isbn13, .pages {
+	padding-right: 20px;
+}
+
+.isbn10, .publisher {
+	padding-left: 20px;
+}
+
+.pagepub {
+	color: #2aa198;
+}
+
+.available {
+	color: #859900;
+	font-weight: bold;
+}
+
+.notavailable {
+	color: #dc322f;
+	font-style: italic;
+}
+
+.content {
+	background-color: #fdf6e3;
+	margin-top: 0px;
+	margin-bottom: 50px;
+	margin-right: 100px;
+	margin-left: 100px;
+}
+
+.content div {
+	overflow: auto;
+}
+
