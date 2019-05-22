@@ -19,6 +19,7 @@
 *.rar
 *.tar
 *.zip
+build/libs/library-0.1.0.jar.original
 
 # Logs and databases #
 ######################
